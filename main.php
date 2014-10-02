@@ -11,22 +11,19 @@
 </head>
 <body>
 <?php
-
+// include_once("checkCookie.php");
+include_once("TextFactory.php");
 echo "HEY HERE WE ARE IN THE MAIN <br>";
 echo "your cookie is " . $_COOKIE['uid'];
-// include_once("beginFactory.php");
+class Client{
+	public function __construct(){
+		$this->someTextObject = new TextFactory();
+		echo $this->someTextObject->startFactory()."<br />";
+	}
+}
+
+$worker=new Client();
 
 ?>
-<script>
-		// title_arr = ["&nbsp;","&nbsp;","&nbsp;","&nbsp;","&nbsp;","&nbsp;","&nbsp;","&nbsp;","&nbsp;","&nbsp;","&nbsp;","&nbsp;","&nbsp;","&nbsp;","&nbsp;","&lt;","o","&plus;","&lt"];
-		// setInterval(function (title_arr){
-		// 	var temp_arr = [];
-		// 	var i = title_arr.shift();
-		// 	title_arr.push(i);
-		// 	console.log(title_arr);
-		// 	title_arr = temp_arr;
-		// 	$('title').innerHTML = temp_arr.join("");
-		// }, 300);
-</script>
 </body>
 </html>
