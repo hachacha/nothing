@@ -1,0 +1,8 @@
+this is going to be a website where each user will have a unique browsing experience.
+individual experiences on the site and interacting with objects on the site will alter other users' views of the website and each object on each page will be altered depending on how the users interact in each page.
+
+objects(images or html elements) should be used as navigation between pages. 
+There should be no actual formal navigation.
+
+users will be assigned a number when first loggin in, this number is their unique ID tracked and kept track of by their cookies. each id will create a unique browsing experience -- auto-generate a "world"
+
