@@ -11,7 +11,7 @@
 // include_once("checkCookie.php");
 
 echo "HEY HERE WE ARE IN THE MAIN <br>";
-echo "your cookie is " . $_COOKIE['uid'];
+echo "<div id='cook'>" . $_COOKIE['uid'] . "</div>";
 
 ?>
 <br />
@@ -21,19 +21,21 @@ echo "your cookie is " . $_COOKIE['uid'];
 <div id="content">
 </div>
 <script type="text/javascript">
-	$("#go").click(function(e){
-		e.stopImmediatePropagation();
-		e.preventDefault();
-		$.ajax({
-			url:'Client.php',
-			type:'post',
-			success:function(results){
-				console.log("ass");
-				$('#content').html(results);
-			}
+		var cooky = $("#cook").html();
+		$("#go").click(function(e){
+			e.stopImmediatePropagation();
+			e.preventDefault();
+			$.ajax({
+				url:'Client.php',
+				type:'post',
+				data:{"uid":cooky},
+				success:function(results){
+					console.log("ass");
+					$('#content').html(results);
+				}
+			});
+			return false;
 		});
-		return false;
-	});
 	 
 </script>
 </body>
