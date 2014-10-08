@@ -4,26 +4,37 @@
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;o&plus;&lt;
 </title>
 <script type="text/javascript" src="lib/jquery.min.js"></script>
-<script>
-	
-	 
-</script>
+
 </head>
 <body>
 <?php
 // include_once("checkCookie.php");
-include_once("TextFactory.php");
+
 echo "HEY HERE WE ARE IN THE MAIN <br>";
 echo "your cookie is " . $_COOKIE['uid'];
-class Client{
-	public function __construct(){
-		$this->someTextObject = new TextFactory();
-		echo $this->someTextObject->startFactory()."<br />";
-	}
-}
-
-$worker=new Client();
 
 ?>
+<br />
+<a id="go" href="#">clicky</a>
+<br />
+<br />
+<div id="content">
+</div>
+<script type="text/javascript">
+	$("#go").click(function(e){
+		e.stopImmediatePropagation();
+		e.preventDefault();
+		$.ajax({
+			url:'Client.php',
+			type:'post',
+			success:function(results){
+				console.log("ass");
+				$('#content').html(results);
+			}
+		});
+		return false;
+	});
+	 
+</script>
 </body>
 </html>
