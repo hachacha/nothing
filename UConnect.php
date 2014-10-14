@@ -2,7 +2,7 @@
 
 include_once("IConnect.php");
 
-class UniversalConnect implements IConnect{
+class UConnect implements IConnect{
 	private static $server=IConnect::HOST;
 	private static $currentDB=IConnect::DBNAME;
 	private static $user=IConnect::UNAME;
@@ -11,6 +11,8 @@ class UniversalConnect implements IConnect{
 	public function doConnect(){
 		try{
 			self::$db=new PDO("pgsql:host=".self::$server." port=5432 dbname=".self::$currentDB." user=".self::$user." password=". self::$pass);
+    		self::$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
 			if(self::$db){
 				//echo "i've connected";
 			}

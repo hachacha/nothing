@@ -1,10 +1,10 @@
 <?php
 //Filename: IConnect.php
 interface IConnect{
-	const HOST ="";
-	const UNAME ="";
-	const PW ="";
-	const DBNAME = "";
+	const HOST ="localhost";
+	const UNAME ="jon";
+	const PW ="bubbles";
+	const DBNAME = "nothing";
 	public function doConnect();
 }
 ?>
