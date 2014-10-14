@@ -19,7 +19,7 @@ class DeriveFoundation{
 	  		echo $e->getMessage();
 	  		exit();
 		}
-		$this->db=null;	
+		$this->db=null;	//disconnect
 	}
 }
 ?>
