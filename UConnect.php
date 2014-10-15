@@ -11,6 +11,8 @@ class UConnect implements IConnect{
 	public function doConnect(){
 		try{
 			self::$db=new PDO("pgsql:host=".self::$server." port=5432 dbname=".self::$currentDB." user=".self::$user." password=". self::$pass);
+    		self::$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
 			if(self::$db){
 				//echo "i've connected";
 			}
