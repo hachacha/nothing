@@ -17,7 +17,7 @@ class Client{
 		print_r($this->t_array);
 		echo "<br>";
 		$this->TEncaps = new TextEncaps($this->t_array);
-		echo $this->TEncaps->startEncaps();
+		echo "<pre>" . $this->TEncaps->startEncaps() . "</pre>";
 		//$this->ImgObject = new ImgFactory($r->img_amt, $r->d_id);
 
 	}
