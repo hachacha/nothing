@@ -19,7 +19,7 @@ class TextProduct implements Product{
 			$this->row = $q->fetchAll(PDO::FETCH_ASSOC);//return associated array.
 			$this->db=null;	//disconnect
 			for($i=0;$i<$this->limit;$i++){//loop through to choose some random text.
-				$rand_int = rand(0,$this->limit);//make random int
+				$rand_int = mt_rand(0,(sizeof($this->row)-1));//make random int
 				array_push($this->rawReturn, $this->row[$rand_int]);//push a part of the return randomly chosen to rawreturn.
 			}
 			return $this->rawReturn;//return the selected few encapsulated in an array 'txt'

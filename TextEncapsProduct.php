@@ -1,58 +1,58 @@
 <?php
 
-//textproduct.php
 include_once("Product.php");
+include_once("IStyle.php");
 class TextEncapsProduct implements Product{
 	public function __construct($content){
+
+		$this->html = array();
 		$this->content = $content;
-		$this->final_text = array();
-		$this->tag = null;
-		$this->overarch_tag = array("marquee","h2","h3","h4","b","i","p");
-		$this->marquee = array("scrollamount","direction");
-		$this->m_direction = array("up","down","left","right");
-		$this->position = array("relative","absolute","fixed");
-		
+		$this->overarch_tag = ["marquee","h2","h3","h4","b","i","p"];
+		$this->h_class = array('bem','bip','boom');
+		$this->mdir = array("up","down","left","right");
+
 	}
-	public function parsePost($content){
-		$alt = $content['author'];
-		if($content['link_to']==0){
-			$this->overarch_tag[rand(0,$this->sizeof($overarch_tag))];
-		}
-		else{
-			$this->tag = "a";
-			$this->href = "/".$alt."/".$content['link_to'];//'/author/folder/(caught by index)'
-		}
-	}
-	public function genStyle(){
-		//position
-		$x_place = rand(0,500);//should be left Xpx
-		$y_place = rand(0,800);//shoudl be top Ypx
+	public function genStyle($temp_tag,$link_text){
 		//color
 		$color = "";
 		for($q=0;$q<12;$q++){
 			$temp_c = rand(0,15);	
 			$color = $color.(string)$temp_c;
 		}
-		//choose other tag
-		$tag = $this->overarch_tag(rand(0,6));
 		//if marquee
-		if($tag=="marquee"){
-			$fin_dir = $this->m_direction[rand(0,4)];
+		$class = $this->h_class[rand(0,2)];
+		if($temp_tag=="marquee"){
+			$fin_dir = $this->mdir[rand(0,3)];
 			$fin_scroll = rand(0,40);
+			return "<".$temp_tag." direction=".$fin_dir." scrollamount=".$fin_scroll." class='".$class."'>".$link_text."</".$temp_tag.">";
+		}
+
+		return "<".$temp_tag." class='".$class."'>".$link_text."</".$temp_tag.">";//makka string
+	}//end gSfunc()
+
+	public function parsePost($post){
+		$link_text = $post['t_content'];
+		if($post['link_to']=="0"){
+			$temp_tag = $this->overarch_tag[rand(0,(sizeof($this->overarch_tag)-1))];
+			$tag = $this->genStyle($temp_tag,$link_text);
+			
 		}
 		else{
-			$size = rand(0,4);
+			$temp_tag = "a";
+			$author = $post['author'];
+			$href = "hatmen/" . $author."/".$post['link_to'];//'/author/folder/(caught by index)'
+			$tag = "<".$temp_tag." style='z-index:99;' href='".$href."'>".$link_text."</".$temp_tag.">";//make a string
 		}
-
-
+		return $tag;
 	}
+
 	public function getProperties(){
 		//here we need to get if the text is linkable,
 		//pick some possible stylings.
 		foreach ($this->content as $post) {//in the initial denoting text
-			array_push($this->final_text, $this->parsePost($post));//push each piece to the array.
+			array_push($this->html, $this->parsePost($post));//push each piece to the array.
 		}
-		return json_encode($this->final_text);
+		return $this->html;
 	}
 }
 
