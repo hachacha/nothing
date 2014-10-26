@@ -22,8 +22,9 @@ echo "HEY HERE WE ARE IN THE MAIN <br>";
 <div id="content"></div>
    
 <script type="text/javascript">
-		$("#go").click(function(e){
-			var c = $.cookie("uid");
+function new_path(){
+$('.nother').click(function(e){//for permutations of links to next shits.
+			var c = $(this).attr('rel');
 			e.stopImmediatePropagation();
 			e.preventDefault();
 			$.ajax({
@@ -34,11 +35,30 @@ echo "HEY HERE WE ARE IN THE MAIN <br>";
 					console.log(c);
 					console.log(results);
 					$('#content').html(results);
+					new_path();
 				}
 			});
 			return false;
+		});	
+};
+
+	$("#go").click(function(e){//for initial.
+		var c = $.cookie("uid");
+		e.stopImmediatePropagation();
+		e.preventDefault();
+		$.ajax({
+			url:'Client.php',
+			type:'post',
+			data:{"uid":c},
+			success:function(results){
+				console.log(c);
+				console.log(results);
+				$('#content').html(results);
+				new_path();
+			}
 		});
-	 
+		return false;
+	});
 </script>
 </body>
 </html>

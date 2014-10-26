@@ -7,7 +7,7 @@ class DeriveFoundation{
 		$this->table_master="derives";
 		$this->db = UConnect::doConnect();
 		
-		$this->sql = "SELECT txt_amt, img_amt, audio, d_id from $this->table_master where d_id = :uid;";
+		$this->sql = "SELECT txt_amt, img_amt, audio, d_path, d_id from $this->table_master where d_id = :uid;";
 	}
 	public function getDerive(){
 		try{

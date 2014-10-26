@@ -1,33 +1,48 @@
 <?php
 
 include_once("Product.php");
-include_once("IStyle.php");
+// include_once("IStyle.php");
 class TextEncapsProduct implements Product{
-	public function __construct($content){
-
+	public function __construct($content,$routes){
 		$this->html = array();
 		$this->content = $content;
 		$this->overarch_tag = ["marquee","h2","h3","h4","b","i","p"];
 		$this->h_class = array('bem','bip','boom');
 		$this->mdir = array("up","down","left","right");
+		$this->routes = explode(',', $routes);//turn routes to string.
+		$this->x = 0;
 
 	}
 	public function genStyle($temp_tag,$link_text){
 		//color
-		$color = "";
-		for($q=0;$q<12;$q++){
-			$temp_c = rand(0,15);	
-			$color = $color.(string)$temp_c;
+		if($this->x > (count($this->routes)-1)){
+			$this->x=0;
 		}
+		//decide what rel should be.
+		$class = $this->h_class[rand(0,count($this->h_class)-1)];
+		$rel = "";
+		if((rand(0,10))>2){
+			$rel = "rel='".(string)$this->routes[$this->x]."'";
+			$class = $class . " nother";
+		}
+			
+		// $color = "";
+		// for($q=0;$q<12;$q++){
+		// 	$temp_c = rand(0,15);	
+		// 	$color = $color.(string)$temp_c;
+		// }
 		//if marquee
-		$class = $this->h_class[rand(0,2)];
+		
 		if($temp_tag=="marquee"){
 			$fin_dir = $this->mdir[rand(0,3)];
 			$fin_scroll = rand(0,40);
-			return "<".$temp_tag." direction=".$fin_dir." scrollamount=".$fin_scroll." class='".$class."'>".$link_text."</".$temp_tag.">";
+			$elem = "<".$temp_tag." direction=".$fin_dir." scrollamount=".$fin_scroll." class='".$class."' ".$rel.">".$link_text."</".$temp_tag.">";
+			$this->x++;//increment x
+			return $elem;
 		}
-
-		return "<".$temp_tag." class='".$class."'>".$link_text."</".$temp_tag.">";//makka string
+		$elem = "<".$temp_tag." class='".$class."' ".$rel.">".$link_text."</".$temp_tag.">";//makka string
+		$this->x++;//increment x
+		return $elem;
 	}//end gSfunc()
 
 	public function parsePost($post){
@@ -41,7 +56,7 @@ class TextEncapsProduct implements Product{
 			$temp_tag = "a";
 			$author = $post['author'];
 			$href = "hatmen/" . $author."/".$post['link_to'];//'/author/folder/(caught by index)'
-			$tag = "<".$temp_tag." style='z-index:99;' href='".$href."'>".$link_text."</".$temp_tag.">";//make a string
+			$tag = "<".$temp_tag." style='z-index:99;' class='".$this->h_class[rand(0,2)]."' href='".$href."'>".$link_text."</".$temp_tag.">";//make a string
 		}
 		return $tag;
 	}
