@@ -13,7 +13,7 @@
 <?php
 
 echo "HEY HERE WE ARE IN THE MAIN <br>";
-
+echo "cookie is: " . $_COOKIE['uid'];
 ?>
 <br />
 <a id="go" href="#">clicky</a>

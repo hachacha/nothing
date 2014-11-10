@@ -15,7 +15,7 @@
 </head>
 <body>
 
-	<center><a href="main.php"><img src="houseImages/datfukkendog.jpg"/></a></center>
+	<center><a href="main.php"><img src="datfukkendog.jpg"/></a></center>
 
 </body>
 </html>

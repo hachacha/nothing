@@ -14,10 +14,7 @@ class TextEncapsProduct implements Product{
 
 	}
 	public function genStyle($temp_tag,$link_text){
-		//color
-		if($this->x > (count($this->routes)-1)){
-			$this->x=0;
-		}
+
 		//decide what rel should be.
 		$class = $this->h_class[rand(0,count($this->h_class)-1)];
 		$rel = "";
@@ -25,12 +22,15 @@ class TextEncapsProduct implements Product{
 			$rel = "rel='".(string)$this->routes[$this->x]."'";
 			$class = $class . " nother";
 		}
-			
+		
+		//color
 		// $color = "";
 		// for($q=0;$q<12;$q++){
 		// 	$temp_c = rand(0,15);	
 		// 	$color = $color.(string)$temp_c;
 		// }
+
+		
 		//if marquee
 		
 		if($temp_tag=="marquee"){
@@ -47,17 +47,20 @@ class TextEncapsProduct implements Product{
 
 	public function parsePost($post){
 		$link_text = $post['t_content'];
+		if($this->x > (count($this->routes)-1)){
+			$this->x=0;
+		}
 		if($post['link_to']=="0"){
 			$temp_tag = $this->overarch_tag[rand(0,(sizeof($this->overarch_tag)-1))];
 			$tag = $this->genStyle($temp_tag,$link_text);
-			
 		}
 		else{
 			$temp_tag = "a";
 			$author = $post['author'];
-			$href = "hatmen/" . $author."/".$post['link_to'];//'/author/folder/(caught by index)'
+			$href = "authors/" . $author."/".$post['link_to'];//'/author/folder/(caught by index)'
 			$tag = "<".$temp_tag." style='z-index:99;' class='".$this->h_class[rand(0,2)]."' href='".$href."'>".$link_text."</".$temp_tag.">";//make a string
 		}
+		$this->x++;
 		return $tag;
 	}
 

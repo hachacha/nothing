@@ -1,6 +1,7 @@
 <?php
 
 include_once("DeriveFoundation.php"); //handles checking database for shizz.
+
 include_once("TextFactory.php");
 include_once("TextEncaps.php");
 
@@ -16,6 +17,7 @@ class Client{
 		$this->TEncaps = new TextEncaps($this->t_array,$this->derive->d_path);
 		// echo "<pre>" . $this->TEncaps->startEncaps() . "</pre>";
 		$fin_text = $this->TEncaps->startEncaps();
+
 		foreach ($fin_text as $out) {
 			echo $out;
 		}
