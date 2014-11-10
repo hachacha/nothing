@@ -15,6 +15,7 @@
 echo "HEY HERE WE ARE IN THE MAIN <br>";
 echo "cookie is: " . $_COOKIE['uid'];
 ?>
+<a href="logout.php">logout</a>
 <br />
 <a id="go" href="#">clicky</a>
 <br />

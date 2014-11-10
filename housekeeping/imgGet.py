@@ -27,6 +27,8 @@ def toInsert(est_paths,file_path):
 		while i < len(x):#find authors name
 			if x[i]=="authors":
 				author = x[i+1]
+				file_path = '/'.join(x[i:len(x)])
+				print file_path
 				break
 			i+=1
 		try:
