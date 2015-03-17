@@ -7,47 +7,47 @@ class ImageEncapsProduct implements Product{
 		$this->html = array();
 		$this->content = $content;
 		$this->overarch_tag = ["img","marquee"];
-		$this->h_class = array('bem','bip','boom');
+		$this->h_class = array('bem','bip','boom','bab','bbo','boc','bmx','bunga','bew');
 		$this->mdir = array("up","down","left","right");
 		$this->routes = explode(',', $routes);//turn routes to string.
 		$this->x = 0;
 
 	}
+	public function makeGray(){
+		$high = 30;
+		$low = 12;
+		$mod = rand($high, $low);
+		$gray = $mod*8;
+		return "rgb(".$gray.",".$gray.",".$gray.");";
+	}
 	public function genStyle($temp_tag,$link_text){
 
 		//decide what rel should be.
-		$class = $this->h_class[rand(0,count($this->h_class)-1)];
+		$img_class = $this->h_class[rand(0,count($this->h_class)-1)];
+		$div_class = $this->h_class[rand(0,count($this->h_class)-1)];
 		$rel = "";
-		if((rand(0,10))>2){
+		if((rand(0,100))<Product::IMG_LINK_AMT){
+		//changed this to always get a new path!
 			$rel = "rel='".(string)$this->routes[$this->x]."'";
-			$class = $class . " nother";
+			$img_class = $img_class . " nother";
 		}
-		
-		//color
-		// $color = "";
-		// for($q=0;$q<12;$q++){
-		// 	$temp_c = rand(0,15);	
-		// 	$color = $color.(string)$temp_c;
-		// }
+		$gray = $this->makeGray();
 
-		
 		//if marquee
 		
 		if($temp_tag=="marquee"){
 			$fin_dir = $this->mdir[rand(0,3)];
-			$fin_scroll = rand(0,40);
-			$elem = "<".$temp_tag." direction=".$fin_dir." scrollamount=".$fin_scroll." class='".$class."' ".$rel."><img src='".$link_text."'/></".$temp_tag.">";
-			$this->x++;//increment x
+			$fin_scroll = rand(0,20);
+			$elem = "<".$temp_tag." direction=".$fin_dir." scrollamount=".$fin_scroll." class='".$img_class."' style='".$gray."' ".$rel."><img src='".$link_text."'/></".$temp_tag.">";
 			return $elem;
 		}
-		$elem = "<".$temp_tag." class='".$class."' ".$rel." src='".$link_text."' />";//makka string
-		$this->x++;//increment x
+		$elem = "<div class='".$div_class."' style='background-color:".$gray."' ><".$temp_tag." class='".$img_class."' ".$rel." src='".$link_text."' /> </div>";//makka string
 		return $elem;
 	}//end gSfunc()
 
 	public function parsePost($post){
-		$link_text = $post['i_path'];
-		if($this->x > (count($this->routes)-1)){
+		$link_text = $post['file_path'];
+		if($this->x == (count($this->routes))){
 			$this->x=0;
 		}
 		if($post['link_to']=="0"){
@@ -67,6 +67,7 @@ class ImageEncapsProduct implements Product{
 	public function getProperties(){
 		//here we need to get if the text is linkable,
 		//pick some possible stylings.
+
 		foreach ($this->content as $post) {//in the initial denoting text
 			array_push($this->html, $this->parsePost($post));//push each piece to the array.
 		}

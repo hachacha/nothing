@@ -22,13 +22,6 @@ class TextEncapsProduct implements Product{
 			$rel = "rel='".(string)$this->routes[$this->x]."'";
 			$class = $class . " nother";
 		}
-		
-		//color
-		// $color = "";
-		// for($q=0;$q<12;$q++){
-		// 	$temp_c = rand(0,15);	
-		// 	$color = $color.(string)$temp_c;
-		// }
 
 		
 		//if marquee
