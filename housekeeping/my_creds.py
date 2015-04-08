@@ -1,5 +1,0 @@
-db=""
-host=""
-user=""
-password=""
-authors_path = ""

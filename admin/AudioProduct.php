@@ -25,7 +25,7 @@ class AudioProduct implements Product{
 				$rand_int = mt_rand(0,(sizeof($this->row)-1));//make random int
 				array_push($this->rawReturn, $this->row[$rand_int]);//push a part of the return randomly chosen to rawreturn.
 			}
-			return $this->rawReturn;//return the selected few encapsulated in an array 'txt'
+			return $this->rawReturn;//return the selected few encapsulated in an array
 		}
 		catch(PDOException $e) {
 	  		echo $e->getMessage();

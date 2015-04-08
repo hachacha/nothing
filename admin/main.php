@@ -16,13 +16,14 @@
 <script type="text/javascript">
 function new_path(){
 	$('.nother').click(function(e){//for permutations of links to next shits.
-		var c = $(this).attr('rel');
+		var c = $(this).attr('rel');//data rel is new id to process.
+		clicks++;
 		e.stopImmediatePropagation();
 		e.preventDefault();
 		$.ajax({
-			url:'Client.php',
+			url:'admin/Client.php',
 			type:'post',
-			data:{"uid":c},
+			data:{"uid":c,'iters':clicks},
 			success:function(results){
 				$('#content').html(results);
 				new_path();
@@ -33,13 +34,14 @@ function new_path(){
 };
 
 $(window).load(function(e){//for initial.
-	var c = $.cookie("uid");
+	var c = $.cookie("uid");//initial id is the derive.
+	clicks = 0;
 	e.stopImmediatePropagation();
 	e.preventDefault();
 	$.ajax({
-		url:'Client.php',
+		url:'admin/Client.php',
 		type:'post',
-		data:{"uid":c},
+		data:{"uid":c,'iters':clicks},
 		success:function(results){
 			$('#content').html(results);
 			new_path();

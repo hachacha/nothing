@@ -4,9 +4,9 @@
 include_once("Product.php");
 class TextProduct implements Product{
 	private $mfgProduct;
-	public function __construct($limit, $derive){//stick it to the class and make some basic db tweaks.
+	public function __construct($limit, $route){//stick it to the class and make some basic db tweaks.
 		$this->limit = $limit;
-		$this->derive = $derive;
+		$this->route = $route;
 		$this->table = "text_media";
 		$this->sql = "SELECT t_content, author, link_to FROM $this->table WHERE d_id = :derive;";
 		$this->rawReturn = array();
@@ -15,7 +15,7 @@ class TextProduct implements Product{
 	public function getProperties(){
 		try{
 			$q=$this->db->prepare($this->sql);
-			$q->execute(array(':derive'=>$this->derive));
+			$q->execute(array(':derive'=>$this->route));
 			$this->row = $q->fetchAll(PDO::FETCH_ASSOC);//return associated array.
 			$this->db=null;	//disconnect
 			for($i=0;$i<$this->limit;$i++){//loop through to choose some random text.

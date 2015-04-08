@@ -11,7 +11,7 @@ try:
 	conn = psycopg2.connect("dbname="+db+" user="+user+" password="+password) 
 	cur = conn.cursor()
 	cur.execute("SELECT file_path FROM img_media UNION ALL SELECT file_path FROM audio_media;")
-	t_est_paths = cur.fetchall()
+	t_est_paths = cur.fetchall()#temporarily established paths.
 	conn.close()
 except psycopg2.Error as e:
 	print e
@@ -46,7 +46,7 @@ def theInsert(est_paths,file_path,table):
 		except psycopg2.DatabaseError, e:
 			print e
 
-def traverse(path):
+def traverse(path):#for going through and finding each file @ dir. tries to insert on each file.
 	try: 
 		os.listdir(path)
 		f = os.listdir(path)
