@@ -6,6 +6,7 @@ class DeriveFoundation{
 	public function __construct ($uid, $clicks) {
 		$this->uid = $uid;
 		$this->clicks = $clicks;
+		$this->long_path = false;
 		$this->sql_values = '';
 		if (Product::DERIVE_TYPE == "constant") {
 			$this->table_master="derives";	
@@ -35,7 +36,7 @@ class DeriveFoundation{
 			$this->db=null;	//disconnect
 			if($this->long_path){
 				$row->d_path = explode(",", $row->d_path);
-				if(count($row->d_path)<$this->clicks)
+				if(count($row->d_path) <= $this->clicks)
 					$this->clicks=0;
 				$row->d_path = $row->d_path[$this->clicks];
 			}
