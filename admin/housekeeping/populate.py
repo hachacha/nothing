@@ -10,7 +10,7 @@ est_paths=[]
 try:
 	conn = psycopg2.connect("dbname="+db+" user="+user+" password="+password) 
 	cur = conn.cursor()
-	cur.execute("SELECT file_path FROM img_media UNION ALL SELECT file_path FROM audio_media;")
+	cur.execute("SELECT content FROM img_media UNION ALL SELECT content FROM audio_media;")
 	t_est_paths = cur.fetchall()#temporarily established paths.
 	conn.close()
 except psycopg2.Error as e:
@@ -18,18 +18,18 @@ except psycopg2.Error as e:
 for i in t_est_paths:
 	 est_paths.append(i[0])#list of current paths in there.
 
-def theInsert(est_paths,file_path,table):
-	x = file_path.split("/")
+def theInsert(est_paths,content,table):
+	x = content.split("/")
 	i=0
 	while i < len(x):#find authors name
 		if x[i]=="authors":
 			author = x[i+1]
-			file_path = '/'.join(x[i:len(x)])
-			print file_path
+			content = '/'.join(x[i:len(x)])
+			print content
 			break
 		i+=1
-	if file_path in est_paths:
-		print "this shit exists " + file_path
+	if content in est_paths:
+		print "this shit exists " + content
 		pass
 	else:
 		print "down the hatch"
@@ -39,7 +39,7 @@ def theInsert(est_paths,file_path,table):
 			cur.execute("SELECT count(d_id) from derives;")#get d_id
 			max_d_id=cur.fetchone()[0]
 			d_id = random.randrange(1,max_d_id+1)#randomize derive_id
-			cur.execute("INSERT INTO "+table+"(d_id,file_path,author) VALUES(%s,%s,%s);", (d_id,file_path, author))
+			cur.execute("INSERT INTO "+table+"(d_id,content,author) VALUES(%s,%s,%s);", (d_id,content, author))
 			conn.commit()
 			conn.close()
 			print "i insert"

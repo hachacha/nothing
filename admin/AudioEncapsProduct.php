@@ -6,7 +6,7 @@ class AudioEncapsProduct implements Product{
 		$this->content = $content;
 	}
 	public function parsePost($post){
-		$path = $post[0]['file_path'];
+		$path = $post[0]['content'];
 		$path = htmlentities($path, ENT_QUOTES);
 		$tag = array("<div style='display:none;'><audio src='".$path."' controls loop autoplay></audio></div>");
 		return $tag;

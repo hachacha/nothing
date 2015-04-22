@@ -43,7 +43,7 @@ class ImageEncapsProduct implements Product{
 	}//end gSfunc()
 
 	public function parsePost($post){
-		$link_text = $post['file_path'];
+		$link_text = $post['content'];
 		if($post['link_to']=="0"){
 			$temp_tag = $this->overarch_tag[rand(0,(sizeof($this->overarch_tag)-1))];
 			$tag = $this->genStyle($temp_tag,$link_text);

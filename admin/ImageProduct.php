@@ -8,7 +8,7 @@ class ImageProduct implements Product{
 		$this->limit = $limit;
 		$this->route = $route;
 		$this->table = "img_media";
-		$this->sql = "SELECT file_path, author, link_to FROM $this->table WHERE d_id = :derive;";
+		$this->sql = "SELECT content, author, link_to FROM $this->table WHERE d_id = :derive;";
 		$this->rawReturn = array();
 		$this->db = UConnect::doConnect();
 	}
