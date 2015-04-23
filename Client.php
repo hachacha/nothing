@@ -29,21 +29,27 @@ class Client{
 		if($this->derive->txt_amt > 0 && isset($this->derive->txt_amt)){
 			$this->TextObject = new TextFactory($this->derive->txt_amt, $this->derive->d_path);//pass amount of text objects in there
 			$this->t_array = $this->TextObject->startFactory();
-			$this->TEncaps = new TextEncaps($this->t_array,$this->derive->d_path, $clicks);
-			$fin_text = $this->TEncaps->startEncaps();
+			if($this->t_array!=false){
+				$this->TEncaps = new TextEncaps($this->t_array,$this->derive->d_path, $clicks);
+				$fin_text = $this->TEncaps->startEncaps();
+			}
 		}
 			
 		if($this->derive->img_amt > 0 && isset($this->derive->img_amt)){
 			$this->ImageObject = new ImageFactory($this->derive->img_amt,$this->derive->d_path);
 			$this->i_array = $this->ImageObject->startFactory();
-			$this->IEncaps = new ImageEncaps($this->i_array,$this->derive->d_path, $clicks);
-			$fin_img = $this->IEncaps->startEncaps();
+			if($this->i_array!=false){
+				$this->IEncaps = new ImageEncaps($this->i_array,$this->derive->d_path, $clicks);
+				$fin_img = $this->IEncaps->startEncaps();	
+			}
 		}
 		if($this->derive->audio > 0 && isset($this->derive->audio)){
 			$this->AudioObject = new AudioFactory($this->derive->audio,$this->derive->d_path);
 			$this->a_array = $this->AudioObject->startFactory();
-			$this->AEncaps = new AudioEncaps($this->a_array,$this->derive->d_path,$clicks);
-			$fin_audio = $this->AEncaps->startEncaps();
+			if($this->a_array!=false){
+				$this->AEncaps = new AudioEncaps($this->a_array,$this->derive->d_path,$clicks);
+				$fin_audio = $this->AEncaps->startEncaps();
+			}
 		}
 		
 		if($clicks == count($this->derive->d_path)){

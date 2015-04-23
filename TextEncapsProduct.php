@@ -38,10 +38,18 @@ class TextEncapsProduct implements Product{
 			$tag = $this->genStyle($temp_tag,$link_text);
 		}
 		else{
-			$temp_tag = "a";
-			$author = $post['author'];
-			$href = "authors/" . $author."/".$post['link_to'];//'/author/folder/(caught by index)'
-			$tag = "<".$temp_tag." style='z-index:99;' class='".$this->h_class[rand(0,2)]."' href='".$href."'>".$link_text."</".$temp_tag.">";//make a string
+			preg_match('@^(?:http://)?([^/]+)@i',$post['link_to'], $match);
+			preg_match('@^(?:https://)?([^/]+)@i',$post['link_to'], $matchs);
+			if(!empty($match)||!empty($matchs)){//external
+				$tag = "<a style='z-index:99;' class='".$this->h_class[rand(0,2)]."' href='".$post['link_to']."' target='_blank'>".$link_text."</a>";//make a string	
+			}
+			else{//internal link
+				$temp_tag = "a";
+				$author = $post['author'];
+				$href = "authors/" . $author."/".$post['link_to'];//'/author/folder/(caught by index)'
+				$tag = "<".$temp_tag." style='z-index:99;' class='".$this->h_class[rand(0,2)]."' href='".$href."'>".$link_text."</".$temp_tag.">";//make a string	
+			}
+			
 		}
 		return $tag;
 	}

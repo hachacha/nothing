@@ -18,8 +18,8 @@ class AudioProduct implements Product{
 			$q->execute(array(':derive'=>$this->derive));
 			$this->row = $q->fetchAll(PDO::FETCH_ASSOC);//return associated array.
 			$this->db=null;	//disconnect
-			if(sizeof($this->row)-1<0){
-				return;
+			if(sizeof($this->row)==0){
+				return false;
 			}
 			for($i=0;$i<$this->limit;$i++){//loop through to choose some random 
 				$rand_int = mt_rand(0,(sizeof($this->row)-1));//make random int

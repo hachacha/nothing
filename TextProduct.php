@@ -8,18 +8,23 @@ class TextProduct implements Product{
 		$this->limit = $limit;
 		$this->route = $route;
 		$this->table = "text_media";
-		$this->sql = "SELECT content, author, link_to FROM $this->table WHERE d_id = :derive;";
+		$this->sql = "SELECT content, author, link_to FROM $this->table WHERE d_id = :derive limit :d_limit";
 		$this->rawReturn = array();
 		$this->db = UConnect::doConnect();
 	}
 	public function getProperties(){
 		try{
 			$q=$this->db->prepare($this->sql);
-			$q->execute(array(':derive'=>$this->route));
+			$q->execute(array(':derive'=>$this->route,':d_limit'=>$this->limit));
 			$this->row = $q->fetchAll(PDO::FETCH_ASSOC);//return associated array.
 			$this->db=null;	//disconnect
+			$this->returned_amt = sizeof($this->row);
+			if(sizeof($this->returned_amt)==0)
+				return FALSE;
+			if($this->limit > $this->returned_amt)
+				$this->limit = $this->returned_amt;
 			for($i=0;$i<$this->limit;$i++){//loop through to choose some random text.
-				$rand_int = mt_rand(0,(sizeof($this->row)-1));//make random int
+				$rand_int = mt_rand(0,(sizeof($this->row)));//make random int
 				array_push($this->rawReturn, $this->row[$rand_int]);//push a part of the return randomly chosen to rawreturn.
 			}
 			return $this->rawReturn;//return the selected few encapsulated in an array 'txt'
