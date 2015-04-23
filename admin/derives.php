@@ -1,49 +1,42 @@
 <html>
 	<head>
-		<title>edit image</title>
+		<title>edit derives</title>
 		<script type="text/javascript" src="../lib/jquery.min.js"></script>
 		<style>
 			.ret{
-				background-color: ghostwhite;
+				background-color: limegreen;
 			}
 			textarea{
 				resize:both;
 			}
-			.preImg img {
-			    height: 100px;
-			    width: 100px;
-			}
 		</style>
 	</head>
 	<body>
-		<blink><h2>img edit; aight</h2></blink>
+		<blink><h2>derives edit; aight</h2></blink>
 		<ul>
-			<li>when you log in you get a cookie/derive set like [1,3,4,2] (unless you have it set to endless)</li>
-			<li>first page you're on is 1. second click brings you to 3. third to 4 etc.</li>
-			<li>if you're on derive set 1 you have a chance of seeing any of the content on there that has derive of 1</li>
-			<li>images MUST to be attributed to an author.</li>
-			<li>if it's not linking to anything then put a zero in there</li>
-			<li>if it is linking somewhere make sure that the author is set, and the link_to has the same name as the folder within the author's folder</li>
-			<li>within that you need to have an index.php OR index.html as the main landing page</li>
+			<li>if this is set to constant then the derive_path should be just one option</li>
+			<li>otherwise it should be a path like so 1,4,3,2 etc</li>
+			<li>first page you're on is 1. second click brings you to 4. third to 3...</li>
+			<li>in constant mode each it will just keep going to the next path related.</li>
+			<li>amt is amount. how much of each thing do you want to show up for each page</li>
 		</ul>
 
 		<a href="#newone">go to make new</a>
 		<?php 
-			include_once("AdminImage.php");
+			include_once("AdminDerives.php");
 		?>
 		<h2 id="newone">MAKE A NEW ONE</h2>
 		<div id="return"></div>
-		<p><span style="color:red;">make sure you get the file path right and you UPLOAD your image VIA FTP</span></p>
 		<form id='newOne'>
 			<input type="hidden" name="q_type" value="insert"></input>
-			<label for="d_id">derive</label>
-			<input name="d_id" type="textarea"></input>
-			<label for="content">content</label>
-			<input name="content" type="textarea"></input>
-			<label for="link_to">link</label>
-			<input name="link_to" type="textarea"></input>
-			<label for="author">author</label>
-			<input name="author" type="textarea"></input>
+			<label for="txt_amt">txtamount</label>
+			<input name="txt_amt" type="textarea"></input>
+			<label for="img_amt">img amount</label>
+			<input name="img_amt" type="textarea"></input>
+			<label for="audio">audio</label>
+			<input name="audio" type="textarea"></input>
+			<label for="d_path">derive path</label>
+			<input name="d_path" type="textarea"></input>
 			<input type="submit" name="submit" value="make new"></input>
 		</form>
 		
@@ -55,7 +48,7 @@
 					console.log(createData);
 					$.ajax({
 						type: "POST",
-						url: "AdminImage.php",
+						url: "AdminDerives.php",
 						data: createData,
 			            success: function(data) {
 			                console.log(data);
@@ -70,10 +63,10 @@
 					e.preventDefault();
 					var updateData = $("#"+this.id).serialize();
 					var returnID = $("#return"+this.id);
-					console.log("#return"+this.id);
+					console.log(updateData);
 					$.ajax({
 						type: "POST",
-						url: "AdminImage.php",
+						url: "AdminDerives.php",
 						data: updateData,
 			            success: function(data) {
 			                console.log(data);
@@ -88,11 +81,11 @@
 				});
 				$('.deleteButton').click(function(e){
 					e.preventDefault();
-					var deleteData = "media_id=i_id&q_type=delete&id="+this.id;
+					var deleteData = "media_id=d_id&q_type=delete&id="+this.id;
 					var returnID = $("#returnu"+this.id);
 					$.ajax({
 						type: "POST",
-						url: "AdminImage.php",
+						url: "AdminDerives.php",
 						data: deleteData,
 			            success: function(data) {
 			                console.log(data);
@@ -103,6 +96,7 @@
 			            }
 					});
 				});
+
 			});
 		</script>
 	</body>

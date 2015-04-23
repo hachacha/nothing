@@ -8,6 +8,7 @@
 		<li><a href="runnit.php">refresher</a></li>
 		<li><a href="text.php">text</a></li>
 		<li><a href="image.php">image</a></li>
+		<li><a href="derives.php">derive</a></li>
 	</ul>
 
 </body>

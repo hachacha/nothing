@@ -65,7 +65,7 @@
 					e.preventDefault();
 					var updateData = $("#"+this.id).serialize();
 					var returnID = $("#return"+this.id);
-					console.log("#return"+this.id);
+					console.log(updateData);
 					$.ajax({
 						type: "POST",
 						url: "AdminText.php",
@@ -74,6 +74,24 @@
 			                console.log(data);
 			                // console.log("#return"+this.id);
 			                console.log(returnID);
+			                returnID.html(data);
+			            },
+			            error: function(){
+			                  alert('error handing here');
+			            }
+					});
+				});
+				$('.deleteButton').click(function(e){
+					e.preventDefault();
+					var deleteData = "media_id=tm_id&q_type=delete&id="+this.id;
+					var returnID = $("#returnu"+this.id);
+					console.log(deleteData);
+					$.ajax({
+						type: "POST",
+						url: "AdminText.php",
+						data: deleteData,
+			            success: function(data) {
+			                console.log(data);
 			                returnID.html(data);
 			            },
 			            error: function(){

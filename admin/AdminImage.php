@@ -12,6 +12,12 @@
 					echo parent::evalUp($_POST, "image");
 					return;	
 				}
+				elseif ($_POST['q_type']=='delete') {
+					if(parent::deleteMe($_POST,"img_media")==TRUE)
+						echo "WOW U REALLY DELETED ME LOL! <a href='#' onclick='window.location.reload();'>refresh</a>";
+					else
+						echo "THS FUCKD UP. CALL THE COPS";
+				}
 			}
 			else{
 				$this->row = null;
