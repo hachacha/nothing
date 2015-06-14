@@ -19,6 +19,8 @@
 			<li>first page you're on is 1. second click brings you to 4. third to 3...</li>
 			<li>in constant mode each it will just keep going to the next path related.</li>
 			<li>amt is amount. how much of each thing do you want to show up for each page</li>
+			<li> to change whether it goes through sets or through constant use FTP and edit the file named Product.php</li>
+			<li>i'll change it so you can just edit those things in here in a few days</li>
 		</ul>
 
 		<a href="#newone">go to make new</a>

@@ -24,7 +24,7 @@ class ImageProduct implements Product{
 			if($this->limit > $this->returned_amt)
 				$this->limit = $this->returned_amt;
 			for($i=0;$i<$this->limit;$i++){//loop through to choose some random img.
-				$rand_int = mt_rand(0,(sizeof($this->row)));//make random int
+				$rand_int = mt_rand(0,(sizeof($this->limit)-1));//make random int
 				array_push($this->rawReturn, $this->row[$rand_int]);//push a part of the return randomly chosen to rawreturn.
 			}
 			return $this->rawReturn;//return the selected few encapsulated in an array 'txt'

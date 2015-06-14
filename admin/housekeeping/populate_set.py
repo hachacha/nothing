@@ -15,6 +15,7 @@ try:
 	conn.close()
 except psycopg2.Error as e:
 	print e
+	
 try:
 	conn = psycopg2.connect("dbname="+db+" user="+user+" password="+password) 
 	cur = conn.cursor()
@@ -23,6 +24,7 @@ try:
 	conn.close()
 except psycopg2.Error as e:
 	print e
+
 try:
 	conn = psycopg2.connect("dbname="+db+" user="+user+" password="+password) 
 	cur = conn.cursor()
@@ -52,7 +54,7 @@ def theInsert(est_paths,content,table):
 		try:
 			conn = psycopg2.connect("dbname="+db+" user="+user+" password="+password) 
 			cur = conn.cursor()
-			cur.execute("SELECT count(d_id) from derives;")#get d_id
+			cur.execute("SELECT count(d_id) from derives_set;")#get d_id
 			max_d_id=cur.fetchone()[0]
 			d_id = random.randrange(1,max_d_id+1)#randomize derive_id
 			cur.execute("INSERT INTO "+table+"(d_id,content,author) VALUES(%s,%s,%s);", (d_id,content, author))
