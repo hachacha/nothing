@@ -2,6 +2,7 @@
 echo "hi friend <br />";
 echo "<br />";
 echo <<<EOT
+THIS IS FOR CONSTANT FORMAT DERIVES.
 <pre> 
                           (####)
                         (#######)

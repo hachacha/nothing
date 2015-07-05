@@ -11,7 +11,7 @@ try:
 	conn = psycopg2.connect("dbname="+db+" user="+user+" password="+password) 
 	cur = conn.cursor()
 	cur.execute("DELETE FROM img_media;")
-	t_est_paths = cur.fetchall()#temporarily established paths.
+	conn.commit()
 	conn.close()
 except psycopg2.Error as e:
 	print e
@@ -19,7 +19,7 @@ try:
 	conn = psycopg2.connect("dbname="+db+" user="+user+" password="+password) 
 	cur = conn.cursor()
 	cur.execute("DELETE FROM audio;")
-	t_est_paths = cur.fetchall()#temporarily established paths.
+	conn.commit()
 	conn.close()
 except psycopg2.Error as e:
 	print e
