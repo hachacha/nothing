@@ -9,9 +9,9 @@ class AdminEdit {
 			$table = "derives_set";
 		}
 		elseif(Product::DERIVE_TYPE=="constant"){
-			$this->table = "derives";
+			$table = "derives";
 		}
-		$this->sql = "SELECT * FROM $table;";
+		$this->sql = "SELECT * FROM $table ";
 		$this->db = UConnect::doConnect();
 		$q=$this->db->prepare($this->sql);
 		$q->execute();
