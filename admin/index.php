@@ -9,10 +9,14 @@
 		<ul>
 			<li><a href="runnit.php">refresher for CONSTANT</a></li>
 			<li><a href="runnit_set.php">refresher for SETs</a></li>
+			<ul>
+				<li><a href="one_all.php">navigate here to make your constant shit all totally random each time. do this after you've run "refresher for constant"</a></li>
+			</ul>
 		</ul>
 		
 		<li><a href="text.php">text</a></li>
 		<li><a href="image.php">image</a></li>
+		<li><a href="audio.php">audio</a>
 		<li><a href="derives.php">derive</a></li>
 	</ul>
 <iframe width="420" height="315" src="https://www.youtube.com/embed/QMZ_rQKAy7c" frameborder="0" allowfullscreen></iframe>

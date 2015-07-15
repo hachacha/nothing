@@ -1,0 +1,5 @@
+db="nothing"
+host="localhost"
+user="jon"
+password="helloimjay"
+authors_path = "/var/www/nothing/authors"

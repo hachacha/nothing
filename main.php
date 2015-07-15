@@ -3,9 +3,9 @@
 <title>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;o&plus;&lt;
 </title>
-<script type="text/javascript" src="../lib/jquery.min.js"></script>
-<script type="text/javascript" src="../lib/jquery.cookie.js"></script>
-<link rel="stylesheet" type="text/css" href="../lib/style.css">
+<script type="text/javascript" src="lib/jquery.min.js"></script>
+<script type="text/javascript" src="lib/jquery.cookie.js"></script>
+<link rel="stylesheet" type="text/css" href="lib/style.css">
 
 
 </head>
@@ -21,12 +21,13 @@ function new_path(){
 		e.stopImmediatePropagation();
 		e.preventDefault();
 		$.ajax({
-			url:'../Client.php',
+			url:'Client.php',
 			type:'post',
 			data:{"uid":c,'iters':clicks},
 			success:function(results){
 				$('#content').html(results);
 				new_path();
+				$('[rel]').each(function(){$(this).css('z-index','99999999')});//make sure that this is as visible as possible
 			}
 		});
 		return false;
@@ -39,12 +40,13 @@ $(window).load(function(e){//for initial.
 	e.stopImmediatePropagation();
 	e.preventDefault();
 	$.ajax({
-		url:'../Client.php',
+		url:'Client.php',
 		type:'post',
 		data:{"uid":c,'iters':clicks},
 		success:function(results){
 			$('#content').html(results);
 			new_path();
+			$('[rel]').each(function(){$(this).css('z-index','99999999')});
 		}
 	});
 	return false;
