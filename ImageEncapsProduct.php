@@ -50,8 +50,7 @@ class ImageEncapsProduct implements Product{
 		}
 		else{
 			$temp_tag = "a";
-			$author = $post['author'];
-			$href = "authors/" . $author."/".$post['link_to'];//'/author/folder/(caught by index)'
+			$href = "authors/".$post['link_to'];//'/author/folder/(caught by index)'
 			$tag = "<".$temp_tag." style='z-index:99;' class='".$this->h_class[rand(0,2)]."' href='".$href."'><img src='".$link_text."'/></".$temp_tag.">";//make a string
 		}
 		return $tag;
